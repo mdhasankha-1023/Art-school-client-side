@@ -40,6 +40,7 @@ const SignUp = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
+                navigate('/')
                 successAlert('Sign-up Successfully')
             })
             .catch(error => errorAlert(error.message))

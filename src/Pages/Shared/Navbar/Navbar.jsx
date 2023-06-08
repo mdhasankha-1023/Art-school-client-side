@@ -1,7 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/logo/logo.png'
+import useAuth from '../../../Hooks/useAuth';
+import { FaUserAlt } from 'react-icons/fa';
 
 const Navbar = () => {
+    const { user, logOut, successAlert, errorAlert } = useAuth();
+    const navigate = useNavigate();
+
+    // handle Log out 
+    const handleLogOutBtn = () => {
+
+        // log out
+            logOut()
+            .then(() => {
+                navigate('/login')
+                successAlert('Log out Successfully')
+            })
+            .catch(error => errorAlert(error.message))
+        
+    }
 
     const NavLink = <>
         <li><Link to='/'>Home</Link></li>
@@ -40,12 +57,32 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <div className='hidden sm:block me-4'>
-                    <Link to='/login'>
-                        <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white me-4">Login</button>
-                    </Link>
-                    <Link to='/sign-up'>
-                        <button className="btn btn-outline btn-sm border-0 bg-[#000] hover:bg-[#385777] text-white">Sign-up</button>
-                    </Link>
+                    {user ?
+                        <div className='flex items-center gap-4'>
+                            <button onClick={handleLogOutBtn} className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white">Log out</button>
+                            <div className="avatar placeholder cursor-pointer">
+                                {user?.photoURL !== null ?
+                                    <div className="rounded-full border border-gray-500 w-12">
+                                        <img className='w-full' src={user.photoURL} alt="" />
+                                    </div>
+                                    :
+                                    <div className="rounded-full border border-gray-500 p-1 w-12">
+                                        <FaUserAlt size='1.5em'></FaUserAlt>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        :
+                        <>
+                            <Link to='/login'>
+                                <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white me-4">Login</button>
+                            </Link>
+                            <Link to='/sign-up'>
+                                <button className="btn btn-outline btn-sm border-0 bg-[#000] hover:bg-[#385777] text-white">Sign-up</button>
+                            </Link>
+                        </>
+
+                    }
                 </div>
             </div>
         </div>
