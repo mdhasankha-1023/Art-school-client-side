@@ -4,11 +4,15 @@ import logo from '../../../assets/logo/logo.png'
 const Navbar = () => {
 
     const NavLink = <>
-            <li><Link to='/'>Home</Link></li>
-            <li tabIndex={0} to='/instructors'><Link>Instructors</Link></li>
-            <li><Link to='/classes'>Classes</Link></li>
-            <li><Link to='/dashBoard'>Dashboard</Link></li>
-        </>
+        <li><Link to='/'>Home</Link></li>
+        <li tabIndex={0} to='/instructors'><Link>Instructors</Link></li>
+        <li><Link to='/classes'>Classes</Link></li>
+        <li><Link to='/dashBoard'>Dashboard</Link></li>
+        <div className='flex flex-col gap-4 md:hidden'>
+            <button className="btn btn-outline btn-sm border-0 bg-[#FF3131] text-white me-4">Login</button>
+            <button className="btn btn-outline btn-sm border-0 bg-[#151515] text-white">Sign-up</button>
+        </div>
+    </>
 
 
 
@@ -31,8 +35,10 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-            <button className="btn btn-outline btn-sm border-0 bg-[#FF3131] text-white me-4">Login</button>
-            <button className="btn btn-outline btn-sm border-0 bg-[#151515] text-white">Sign-up</button>
+                <div className='hidden sm:block me-4'>
+                    <button className="btn btn-outline btn-sm border-0 bg-[#FF3131] text-white me-4">Login</button>
+                    <button className="btn btn-outline btn-sm border-0 bg-[#151515] text-white">Sign-up</button>
+                </div>
             </div>
         </div>
     );
