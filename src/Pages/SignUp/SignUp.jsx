@@ -18,7 +18,7 @@ const SignUp = () => {
     });
     return (
         <div className="hero min-h-screen bg-base-200">
-            <div className="hero-content w-1/2">
+            <div className="hero-content w-full md:w-1/2">
                 <div className="card  w-full shadow-2xl bg-base-100">
                     <h3 className='text-3xl text-center font-bold mt-8 uppercase underline'>Sign up !!</h3>
                     <form onSubmit={formik.handleSubmit}>

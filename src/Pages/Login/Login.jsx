@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [clicked, setClicked] = useState(false)
-    console.log(clicked)
+    
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -16,8 +16,8 @@ const Login = () => {
         },
     });
     return (
-        <div className="hero min-h-screen bg-base-200">
-            <div className="hero-content w-2/5">
+        <div className="hero h-screen md:min-h-screen bg-base-200">
+            <div className="hero-content w-full md:w-2/5">
                 <div className="card  w-full shadow-2xl bg-base-100">
                     <h3 className='text-3xl text-center font-bold mt-8 uppercase underline'>Login !!</h3>
                     <form onSubmit={formik.handleSubmit}>
