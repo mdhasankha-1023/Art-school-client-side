@@ -3,11 +3,18 @@ import Main from "../Layout/Main";
 import Others from "../Layout/Others";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import Home from "../Pages/Home/Home/Home";
 
   const router = createBrowserRouter([
     {
         path: '/',
-        element: <Main></Main>
+        element: <Main></Main>,
+        children:[
+            {
+                path: '/',
+                element: <Home></Home>
+            }
+        ]
     },
     {
         path: '/',
