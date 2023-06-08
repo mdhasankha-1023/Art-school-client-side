@@ -9,8 +9,12 @@ const Navbar = () => {
         <li><Link to='/classes'>Classes</Link></li>
         <li><Link to='/dashBoard'>Dashboard</Link></li>
         <div className='flex flex-col gap-4 md:hidden'>
-            <button className="btn btn-outline btn-sm border-0 bg-[#FF3131] text-white me-4">Login</button>
-            <button className="btn btn-outline btn-sm border-0 bg-[#151515] text-white">Sign-up</button>
+            <Link to='/login'>
+                <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white me-4">Login</button>
+            </Link>
+            <Link>
+                <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white">Sign-up</button>
+            </Link>
         </div>
     </>
 
@@ -36,8 +40,12 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <div className='hidden sm:block me-4'>
-                    <button className="btn btn-outline btn-sm border-0 bg-[#FF3131] text-white me-4">Login</button>
-                    <button className="btn btn-outline btn-sm border-0 bg-[#151515] text-white">Sign-up</button>
+                    <Link to='/login'>
+                        <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white me-4">Login</button>
+                    </Link>
+                    <Link>
+                        <button className="btn btn-outline btn-sm border-0 bg-[#000] hover:bg-[#385777] text-white">Sign-up</button>
+                    </Link>
                 </div>
             </div>
         </div>
