@@ -12,7 +12,7 @@ const Navbar = () => {
             <Link to='/login'>
                 <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white me-4">Login</button>
             </Link>
-            <Link>
+            <Link to='/sign-up'>
                 <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white">Sign-up</button>
             </Link>
         </div>
@@ -43,7 +43,7 @@ const Navbar = () => {
                     <Link to='/login'>
                         <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white me-4">Login</button>
                     </Link>
-                    <Link>
+                    <Link to='/sign-up'>
                         <button className="btn btn-outline btn-sm border-0 bg-[#000] hover:bg-[#385777] text-white">Sign-up</button>
                     </Link>
                 </div>
