@@ -33,8 +33,8 @@ const Footer = () => {
                 </div>
 
             </footer>
-            <footer className="footer items-center p-4 bg-neutral text-neutral-content justify-center text-center">
-                <p>Copyright © 2023 - All right reserved by Art School Organization</p>
+            <footer className="footer items-center p-6 bg-[#100F1F] text-neutral-content justify-center text-center border-t-2 ">
+                <p className='inline-block'>Copyright © 2023 - All right reserved by <span className='text-[#FF3131] link-hover cursor-pointer'>Art School Organization</span></p>
 
             </footer>
         </>

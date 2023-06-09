@@ -1,14 +1,13 @@
-import Cover from "../../../Components/Cover/Cover";
-import useInstructors from "../../../Hooks/useInstructors";
-import Instructor from "../Instructor/Instructor";
+import Cover from "../../../../Components/Cover/Cover";
+import useClasses from "../../../../Hooks/useClasses";
+import Class from "../Class/Class";
 
 
-const Instructors = () => {
-    const [instructors] = useInstructors();
-
+const Classes = () => {
+    const [classes] = useClasses();
     return (
         <div>
-            <Cover mainHeading={"All Instructors"} subHeading={"Instructors"}></Cover>
+            <Cover mainHeading={"All Classes"} subHeading={"Classes"}></Cover>
             <div className="flex justify-between max-w-screen-lg mx-auto mt-20">
                 <div className="form-control">
                     <div className="input-group">
@@ -22,23 +21,22 @@ const Instructors = () => {
                     <div className="input-group">
                         <select className="select select-bordered">
                             <option disabled selected>Filter By</option>
-                            <option>All</option>
-                            <option>Top-instructors</option>
+                            <option>High-price</option>
+                            <option>Low Price</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div className="mt-10 mb-20 max-w-screen-lg mx-auto grid grid-cols-3 gap-4">
                 {
-                    instructors.map(i => <Instructor
-                        key={i._id}
-                        item={i}
-                    ></Instructor>)
+                    classes.map(c => <Class
+                        key={c._id}
+                        item={c}
+                    ></Class>)
                 }
             </div>
-
         </div>
     );
 };
 
-export default Instructors;
+export default Classes;
