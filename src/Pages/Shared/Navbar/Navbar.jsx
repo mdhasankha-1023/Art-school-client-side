@@ -22,7 +22,7 @@ const Navbar = () => {
 
     const NavLink = <>
         <li><Link to='/'>Home</Link></li>
-        <li tabIndex={0} to='/instructors'><Link>Instructors</Link></li>
+        <li tabIndex={0}><Link to='/instructors'>Instructors</Link></li>
         <li><Link to='/classes'>Classes</Link></li>
         <li><Link to='/dashBoard'>Dashboard</Link></li>
         <div className='flex flex-col gap-4 md:hidden'>
