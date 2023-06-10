@@ -10,6 +10,7 @@ import DashBoard from "../Layout/DashBoard";
 import DashBoardHome from "../Pages/DashBoard/DashBoardHome/DashBoardHome";
 import SelectedClasses from "../Pages/DashBoard/SelectedClasses/SelectedClasses";
 import Payment from "../Pages/DashBoard/Payment/Payment";
+import PrivetRoute from "./PrivetRoute";
 
 
   const router = createBrowserRouter([
@@ -47,10 +48,10 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
     },
     {
         path: '/dashBoard',
-        element: <DashBoard></DashBoard>,
+        element: <PrivetRoute><DashBoard></DashBoard></PrivetRoute>,
         children:[
             {
-                path: '/dashBoard/dashBoardHome',
+                path: '/dashBoard',
                 element: <DashBoardHome></DashBoardHome>
             },
             {
