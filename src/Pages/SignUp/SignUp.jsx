@@ -15,8 +15,7 @@ const SignUp = () => {
 
 
     const onSubmit = data => {
-        const { name, email, password, photoUrl } = data;
-
+        const { name, email, password, photoUrl, option} = data;
 
         // sing-up with email and password
         signUp(email, password)
@@ -26,8 +25,21 @@ const SignUp = () => {
                 // update user profile
                 userProfileUpdate(name, photoUrl)
                     .then(() => {
-                        navigate('/login')
-                        successAlert('Sign-up Successfully')
+                        fetch('http://localhost:5000/users',{
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify({name, email, role:option})
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if(data.insertedId){
+                                navigate('/login')
+                                successAlert('Sign-up Successfully')
+                            }
+                        })
+                        .catch(error => errorAlert(error.message))
                     })
                     .catch(error => errorAlert(error.message))
 
@@ -52,7 +64,7 @@ const SignUp = () => {
     return (
         <>  <Helmet>
             <title>Art-School || Sign up</title>
-            </Helmet>
+        </Helmet>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content w-full md:w-1/2">
                     <div className="card  w-full shadow-2xl bg-base-100">
@@ -62,7 +74,7 @@ const SignUp = () => {
                                 {/* name */}
                                 <div className="form-control">
                                     <label htmlFor="name" className="label">
-                                        <span className="label-text">Name</span>
+                                        <span className="label-text font-bold">Name <span className="text-[#FF3131]">*</span></span>
                                     </label>
                                     <input
                                         className="input input-bordered"
@@ -74,7 +86,7 @@ const SignUp = () => {
                                 {/* email */}
                                 <div className="form-control">
                                     <label htmlFor="email" className="label">
-                                        <span className="label-text">Email</span>
+                                        <span className="label-text font-bold">Email<span className="text-[#FF3131]">*</span></span>
                                     </label>
                                     <input
                                         className="input input-bordered"
@@ -88,7 +100,7 @@ const SignUp = () => {
                                     {/* password */}
                                     <div className="form-control relative w-1/2">
                                         <label htmlFor="password" className="label">
-                                            <span className="label-text">Password</span>
+                                            <span className="label-text font-bold">Password<span className="text-[#FF3131]">*</span></span>
                                         </label>
                                         <input
                                             className="input input-bordered pe-12"
@@ -112,7 +124,7 @@ const SignUp = () => {
                                     {/* confirm password */}
                                     <div className="form-control relative w-1/2">
                                         <label htmlFor="confirm-password" className="label">
-                                            <span className="label-text">Confirm Password</span>
+                                            <span className="label-text font-bold">Confirm Password<span className="text-[#FF3131]">*</span></span>
                                         </label>
                                         <input
                                             className="input input-bordered"
@@ -126,10 +138,32 @@ const SignUp = () => {
                                     </div>
                                 </div>
 
-                                {/* photo url */}
+                                {/* radio button */}
+                                <div className="form-control gap-8 flex-row my-4">
+                                    <label htmlFor="confirm-password" className="label">
+                                        <span className="label-text font-bold">Join as a<span className="text-[#FF3131]">*</span></span>
+                                    </label>
+                                    <div className="flex gap-8">
+                                        <label className="flex items-center cursor-pointer">
+                                            <span className="label-text me-4">Student:</span>
+                                            <input type="radio" value="student" className="radio checked:bg-[#FF3131]" 
+                                            {...register("option", { required: true })}
+                                            />
+
+                                        </label>
+                                        <label className="flex items-center cursor-pointer">
+                                            <span className="label-text me-4">Instructor:</span>
+                                            <input type="radio" value="instructor" className="radio checked:bg-[#FF3131]" 
+                                            {...register("option", { required: true })}/>
+                                        </label>
+                                    </div>
+                                    {errors.option && <p className="text-red-600">You must be select one</p>}
+                                </div>
+
+                                {/* photo URL */}
                                 <div className="form-control relative">
                                     <label htmlFor="confirm-password" className="label">
-                                        <span className="label-text">Photo URL</span>
+                                        <span className="label-text font-bold">Photo URL<span className="text-[#FF3131]">*</span></span>
                                     </label>
                                     <input
                                         className="input input-bordered"

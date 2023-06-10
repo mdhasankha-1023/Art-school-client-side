@@ -1,16 +1,17 @@
 import { FaTrashAlt } from "react-icons/fa";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
-import useSelectedClasses from "../../../Hooks/useSelectedClasses";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useSelectedClasses from "../../../Hooks/useSelectedClasses";
 
 
 const SelectedClasses = () => {
-    const { errorAlert, successAlert } = useAuth();
-    const [refetch, selectedClasses] = useSelectedClasses();
+    const { user, errorAlert, successAlert } = useAuth();
+    const [selectedClasses, refetch] = useSelectedClasses();
     const navigate = useNavigate();
     // const [data,  setData] = useState({});
+    console.log(selectedClasses)
 
 
 
@@ -45,19 +46,19 @@ const SelectedClasses = () => {
     // handlePayBtn
     const handlePayBtn = (id) => {
         fetch(`http://localhost:5000/added-class/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            navigate('/dashBoard/payment')
-        })
-        .catch()
-        
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                navigate('/dashBoard/payment')
+            })
+            .catch()
+
     }
 
 
     return (
         <div className="w-11/12 mx-auto">
-            <SectionTitle mainHeading={"Selected All Classes"} topHeading={"Preferred classes"}></SectionTitle>
+            <SectionTitle mainHeading={"Your selected Classes"} topHeading={` Hay, ${user.displayName}`}></SectionTitle>
             <div className="overflow-x-auto my-24">
                 <table className="table">
                     {/* head */}
@@ -78,7 +79,18 @@ const SelectedClasses = () => {
                                 key={row._id}
                             >
                                 <th>{index + 1}</th>
-                                <td className="text-xl">{row.Name}</td>
+                                <td className="text-xl w-1/4">
+                                    <div className="flex items-center space-x-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src={row.Image} />
+                                            </div>
+                                        </div>
+                                        <div className="">
+                                            {row.Name}
+                                        </div>
+                                    </div>
+                                </td>
                                 <td className="text-xl">{row.Instructor}</td>
                                 <td className="text-[#FF3131] font-bold">${row.Price}</td>
                                 <th>
@@ -93,6 +105,9 @@ const SelectedClasses = () => {
                         }
                     </tbody>
                 </table>
+                    {
+                        selectedClasses.length === 0 && <h1 className="text-center mt-24 text-2xl font-bold text-gray-400">No Classes Available Here...</h1>
+                    }
             </div>
         </div>
     );

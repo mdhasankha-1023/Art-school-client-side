@@ -10,7 +10,7 @@ const Class = ({ item }) => {
     const handleSelectBtn = () => {
         const addedClass = { addedClass_id: _id, Image, Name, Instructor, Price, email: user.email}
         if (user) {
-            fetch('http://localhost:5000/added-class', {
+            fetch('http://localhost:5000/added-classes', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
