@@ -24,7 +24,9 @@ const Navbar = () => {
         <li><Link to='/'>Home</Link></li>
         <li tabIndex={0}><Link to='/instructors'>Instructors</Link></li>
         <li><Link to='/classes'>Classes</Link></li>
-        <li><Link to='/dashBoard'>Dashboard</Link></li>
+        {
+            user && <li><Link to='/dashBoard'>Dashboard</Link></li>
+        }
         <div className='flex flex-col gap-4 md:hidden'>
             <Link to='/login'>
                 <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white me-4">Login</button>

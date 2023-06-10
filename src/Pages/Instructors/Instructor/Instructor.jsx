@@ -12,7 +12,7 @@ const Instructor = ({ item }) => {
                 <p className="font-bold">Email:  <span className="text-[#FF3131]">{email}</span></p>
                 <p className="font-bold">Classes:  {numberOfClasses}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-outline border-[#FF3131] hover:bg-[#FF3131] hover:text-white hover:border-0 hover:duration-600">See classes</button>
+                    <button className="btn btn-outline border-[#FF3131] hover:bg-[#FF3131] hover:text-white hover:border-[#FF3131] hover:duration-600">See classes</button>
                 </div>
             </div>
         </div>

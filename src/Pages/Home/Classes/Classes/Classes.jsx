@@ -8,7 +8,7 @@ const Classes = () => {
     return (
         <div>
             <Cover mainHeading={"All Classes"} subHeading={"Classes"}></Cover>
-            <div className="flex justify-between max-w-screen-lg mx-auto mt-20">
+            <div className="flex justify-between md:flex-row flex-col items-center max-w-screen-lg mx-auto mt-20 gap-4">
                 <div className="form-control">
                     <div className="input-group">
                         <input type="text" placeholder="Search…" className="input input-bordered" />
@@ -27,7 +27,7 @@ const Classes = () => {
                     </div>
                 </div>
             </div>
-            <div className="mt-10 mb-20 max-w-screen-lg mx-auto grid grid-cols-3 gap-4">
+            <div className="mt-10 mb-20 max-w-screen-lg mx-auto grid md:grid-cols-3 grid-cols-1 gap-4 px-4 md:p-0">
                 {
                     classes.map(c => <Class
                         key={c._id}

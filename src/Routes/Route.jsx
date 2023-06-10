@@ -6,6 +6,11 @@ import SignUp from "../Pages/SignUp/SignUp";
 import Home from "../Pages/Home/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors/Instructors";
 import Classes from "../Pages/Home/Classes/Classes/Classes";
+import DashBoard from "../Layout/DashBoard";
+import DashBoardHome from "../Pages/DashBoard/DashBoardHome/DashBoardHome";
+import SelectedClasses from "../Pages/DashBoard/SelectedClasses/SelectedClasses";
+import Payment from "../Pages/DashBoard/Payment/Payment";
+
 
   const router = createBrowserRouter([
     {
@@ -37,6 +42,24 @@ import Classes from "../Pages/Home/Classes/Classes/Classes";
             {
                 path: '/sign-up',
                 element: <SignUp></SignUp>
+            }
+        ]
+    },
+    {
+        path: '/dashBoard',
+        element: <DashBoard></DashBoard>,
+        children:[
+            {
+                path: '/dashBoard/dashBoardHome',
+                element: <DashBoardHome></DashBoardHome>
+            },
+            {
+                path: '/dashBoard/selected-classes',
+                element: <SelectedClasses></SelectedClasses>
+            },
+            {
+                path: '/dashBoard/payment',
+                element: <Payment></Payment>
             }
         ]
     }
