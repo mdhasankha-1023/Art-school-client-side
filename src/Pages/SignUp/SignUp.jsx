@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -13,9 +12,15 @@ const SignUp = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
+    // handleCheckbox
+    const handleCheckbox = () => {
+        setClicked(!clicked)
+    }
+
 
     const onSubmit = data => {
-        const { name, email, password, photoUrl, option} = data;
+        const { name, email, password, photoUrl, checkbox } = data;
+        console.log(checkbox)
 
         // sing-up with email and password
         signUp(email, password)
@@ -25,22 +30,21 @@ const SignUp = () => {
                 // update user profile
                 userProfileUpdate(name, photoUrl)
                     .then(() => {
-                        fetch('http://localhost:5000/users',{
+                        fetch('http://localhost:5000/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
                             },
-                            body: JSON.stringify({name, email})
+                            body: JSON.stringify({ name, email })
                         })
-                        .then(res => res.json())
-                        .then(data => {
-                            if(data.insertedId){
-                                navigate('/login')
-                                successAlert('Sign-up Successfully')
-                                localStorage.setItem('userRole', option)
-                            }
-                        })
-                        .catch(error => errorAlert(error.message))
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    navigate('/login')
+                                    successAlert('Sign-up Successfully')
+                                }
+                            })
+                            .catch(error => errorAlert(error.message))
                     })
                     .catch(error => errorAlert(error.message))
 
@@ -118,8 +122,6 @@ const SignUp = () => {
                                         {errors.password?.type === 'pattern' && <p className="text-red-600">Password must be [A-Z], [0-9] and [@,#,$,*]</p>}
 
                                         <div className='absolute right-0 top-[60%] me-4 cursor-pointer'>
-                                            <FaEye className={clicked === true ? '' : 'hidden'} onClick={() => setClicked(false)} size='1.5em'></FaEye>
-                                            <FaEyeSlash className={clicked === false ? '' : 'hidden'} onClick={() => setClicked(true)} size='1.5em'></FaEyeSlash>
                                         </div>
                                     </div>
                                     {/* confirm password */}
@@ -139,26 +141,17 @@ const SignUp = () => {
                                     </div>
                                 </div>
 
-                                {/* radio button */}
-                                <div className="form-control gap-8 flex-row my-4">
-                                    <label htmlFor="confirm-password" className="label">
-                                        <span className="label-text font-bold">Join as a<span className="text-[#FF3131]">*</span></span>
+                                {/* show/hide check mark */}
+                                <div className="form-control">
+                                    <label className="label cursor-pointer justify-start">
+                                        <input type="checkbox"
+                                            className="checkbox me-4 checkbox-primary"
+                                            onClick={handleCheckbox}
+                                            {...register('checkbox')} />
+                                        <span className="label-text uppercase font-bold">
+                                            {clicked === true ? 'Hide' : 'Show'}
+                                        </span>
                                     </label>
-                                    <div className="flex gap-8">
-                                        <label className="flex items-center cursor-pointer">
-                                            <span className="label-text me-4">Student:</span>
-                                            <input type="radio" value="student" className="radio checked:bg-[#FF3131]" 
-                                            {...register("option", { required: true })}
-                                            />
-
-                                        </label>
-                                        <label className="flex items-center cursor-pointer">
-                                            <span className="label-text me-4">Instructor:</span>
-                                            <input type="radio" value="instructor" className="radio checked:bg-[#FF3131]" 
-                                            {...register("option", { required: true })}/>
-                                        </label>
-                                    </div>
-                                    {errors.option && <p className="text-red-600">You must be select one</p>}
                                 </div>
 
                                 {/* photo URL */}

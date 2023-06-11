@@ -6,7 +6,7 @@ const DashBoard = () => {
 
 
     // user role
-    const userRole = localStorage.getItem('userRole')
+    const userRole = 'admin';
 
     return (
         <div className="drawer lg:drawer-open">
@@ -23,19 +23,25 @@ const DashBoard = () => {
                         <div className="w-full pb-8">
                             <img src={logo} alt="" />
                         </div>
-                        {userRole !== 'instructor' ?
+                        {userRole == 'student' &&
                             <>
                                 <li><Link to='/dashBoard'>Home</Link></li>
                                 <li><Link to='/dashBoard/selected-classes'>Selected Classes</Link></li>
                                 <li><Link to='/enrolled/classes'>Enrolled Classes</Link></li>
                                 <li><Link to='/dashBoard/payment'>Payment</Link></li>
                             </>
-                            :
-                            <>
+                        }
+                        { userRole === 'instructor'  &&  <>
                                 <li><Link to='/dashBoard'>Home</Link></li>
                                 <li><Link to='/dashBoard/add-class'>Add Class</Link></li>
                                 <li><Link to='/dashBoard/my-classes'>My Classes</Link></li>
                                 <li><Link to='/dashBoard/payment'>Payment</Link></li>
+                            </>
+                        }
+                        { userRole === 'admin'  &&  <>
+                                <li><Link to='/dashBoard'>Home</Link></li>
+                                <li><Link to='/dashBoard/menage-classes'>Menage Classes</Link></li>
+                                <li><Link to='/dashBoard/menage-users'>Menage Users</Link></li>
                             </>
                         }
                     </div>
