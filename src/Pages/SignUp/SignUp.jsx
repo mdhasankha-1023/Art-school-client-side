@@ -35,7 +35,7 @@ const SignUp = () => {
                             headers: {
                                 'content-type': 'application/json'
                             },
-                            body: JSON.stringify({ name, email })
+                            body: JSON.stringify({ name, email, role: 'student' })
                         })
                             .then(res => res.json())
                             .then(data => {
@@ -142,7 +142,7 @@ const SignUp = () => {
                                 </div>
 
                                 {/* show/hide check mark */}
-                                <div className="form-control">
+                                <div className="form-control w-10">
                                     <label className="label cursor-pointer justify-start">
                                         <input type="checkbox"
                                             className="checkbox me-4 checkbox-primary"
