@@ -10,8 +10,6 @@ const SelectedClasses = () => {
     const { user, errorAlert, successAlert } = useAuth();
     const [selectedClasses, refetch] = useSelectedClasses();
     const navigate = useNavigate();
-    // const [data,  setData] = useState({});
-    console.log(selectedClasses)
 
 
 

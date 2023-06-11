@@ -5,7 +5,7 @@ import Class from "../Class/Class";
 
 const Classes = () => {
     const [classes] = useClasses();
-    const approvedClasses = classes.filter(c => c.status !== 'Pending')
+    const approvedClasses = classes?.filter(c => c.status === 'approved')
     return (
         <div>
             <Cover mainHeading={"All Classes"} subHeading={"Classes"}></Cover>

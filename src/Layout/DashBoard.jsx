@@ -5,15 +5,8 @@ import logo from '../assets/logo/logo.png'
 const DashBoard = () => {
 
 
-
-
-
-
-
-
     // user role
     const userRole = localStorage.getItem('userRole')
-    console.log(userRole)
 
     return (
         <div className="drawer lg:drawer-open">
