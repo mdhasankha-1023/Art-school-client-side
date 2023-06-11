@@ -14,6 +14,7 @@ import PrivetRoute from "./PrivetRoute";
 import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 import MyClasses from "../Pages/DashBoard/MyClasses/MyClasses";
 import ManageClasses from "../Pages/DashBoard/ManageClasses/ManageClasses";
+import ManageUsers from "../Pages/DashBoard/ManageUsers/ManageUsers";
 
 
   const router = createBrowserRouter([
@@ -76,6 +77,10 @@ import ManageClasses from "../Pages/DashBoard/ManageClasses/ManageClasses";
             {
                 path: '/dashBoard/manage-classes',
                 element: <ManageClasses></ManageClasses>
+            },
+            {
+                path: '/dashBoard/manage-users',
+                element: <ManageUsers></ManageUsers>
             }
         ]
     }

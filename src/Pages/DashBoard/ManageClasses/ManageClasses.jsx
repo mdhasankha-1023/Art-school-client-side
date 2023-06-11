@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAuth from "../../../Hooks/useAuth";
 import useClasses from "../../../Hooks/useClasses";
@@ -7,12 +8,33 @@ import { FaArrowDown, FaPenSquare } from "react-icons/fa";
 const ManageClasses = () => {
     const { user } = useAuth();
     const [classes] = useClasses();
-    console.log(classes)
+
 
 
     // handleFeedbackBtn
-    const handleFeedbackBtn = () => {
-        console.log('this is feedback button')
+    const handleFeedbackBtn = (id) => {
+        Swal.fire({
+            title: 'Send feedback to user',
+            input: 'text',
+            inputPlaceholder: 'Enter your feedback',
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+              fetch(`http://localhost:5000/classes/${id}`,{
+                method: 'PUT',
+                headers: {
+                    authorization :  `Bearer ${localStorage.getItem('jwt_token')}`
+                },
+                body: JSON.stringify(`${result.value}`)
+              })
+              .then(res => res.json())
+              .then(data => {
+                console.log(data)
+              })
+            }
+          });
     }
 
     return (
@@ -42,7 +64,7 @@ const ManageClasses = () => {
                             <th>Status</th>
                             <th>Approved</th>
                             <th>Deny</th>
-                            <th>Feedback</th>
+                            <th>Send <br /> Feedback</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,7 +122,7 @@ const ManageClasses = () => {
                                     <button disabled={row.status === 'approved' && true} className="btn btn-sm border-0 bg-red-500">deny</button>
                                 </th>
                                 <th className="text-center">
-                                    <div onClick={handleFeedbackBtn} className="p-2 rounded-lg bg-[#FF3131] inline-block text-center text-xl text-white cursor-pointer"><FaPenSquare></FaPenSquare></div>
+                                    <div onClick={() => handleFeedbackBtn(row._id)} className="p-2 rounded-lg bg-[#FF3131] inline-block text-center text-xl text-white cursor-pointer"><FaPenSquare></FaPenSquare></div>
                                 </th>
                             </tr>)
                         }

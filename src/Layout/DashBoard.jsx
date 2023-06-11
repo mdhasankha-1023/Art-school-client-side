@@ -41,7 +41,7 @@ const DashBoard = () => {
                         { userRole === 'admin'  &&  <>
                                 <li><Link to='/dashBoard'>Home</Link></li>
                                 <li><Link to='/dashBoard/manage-classes'>Menage Classes</Link></li>
-                                <li><Link to='/dashBoard/menage-users'>Menage Users</Link></li>
+                                <li><Link to='/dashBoard/manage-users'>Menage Users</Link></li>
                             </>
                         }
                     </div>
