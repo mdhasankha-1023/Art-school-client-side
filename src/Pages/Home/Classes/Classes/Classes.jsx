@@ -5,6 +5,7 @@ import Class from "../Class/Class";
 
 const Classes = () => {
     const [classes] = useClasses();
+    const approvedClasses = classes.filter(c => c.status !== 'Pending')
     return (
         <div>
             <Cover mainHeading={"All Classes"} subHeading={"Classes"}></Cover>
@@ -27,9 +28,9 @@ const Classes = () => {
                     </div>
                 </div>
             </div>
-            <div className="mt-10 mb-20 max-w-screen-lg mx-auto grid md:grid-cols-3 grid-cols-1 gap-4 px-4 md:p-0">
+            <div className="mt-10 mb-20 max-w-screen-lg mx-auto grid md:grid-cols-3 grid-cols-1 gap-y-10 gap-4 px-4 md:p-0">
                 {
-                    classes.map(c => <Class
+                    approvedClasses.map(c => <Class
                         key={c._id}
                         item={c}
                     ></Class>)

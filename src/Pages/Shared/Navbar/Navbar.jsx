@@ -15,6 +15,7 @@ const Navbar = () => {
             .then(() => {
                 navigate('/login')
                 successAlert('Log out Successfully')
+                localStorage.removeItem('userRole')
             })
             .catch(error => errorAlert(error.message))
         
@@ -62,7 +63,7 @@ const Navbar = () => {
                     {user ?
                         <div className='flex items-center gap-4'>
                             <button onClick={handleLogOutBtn} className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white">Log out</button>
-                            <div className="avatar placeholder cursor-pointer">
+                            <div className="avatar online placeholder cursor-pointer">
                                 {user?.photoURL !== null ?
                                     <div className="rounded-full border border-gray-500 w-12">
                                         <img className='w-full' src={user.photoURL} alt="" />

@@ -30,13 +30,14 @@ const SignUp = () => {
                             headers: {
                                 'content-type': 'application/json'
                             },
-                            body: JSON.stringify({name, email, role:option})
+                            body: JSON.stringify({name, email})
                         })
                         .then(res => res.json())
                         .then(data => {
                             if(data.insertedId){
                                 navigate('/login')
                                 successAlert('Sign-up Successfully')
+                                localStorage.setItem('userRole', option)
                             }
                         })
                         .catch(error => errorAlert(error.message))

@@ -4,14 +4,16 @@ import logo from '../assets/logo/logo.png'
 
 const DashBoard = () => {
 
-    const listOption = <>
-    <li><Link to='/dashBoard/dashBoardHome'>Home</Link></li>
-    <li><Link to='/dashBoard/selected-classes'>Selected Classes</Link></li>
-    <li><Link to='/enrolled/classes'>Enrolled Classes</Link></li>
-    <li><Link to='/dashBoard/payment'>Payment</Link></li>
-    </>
 
 
+
+
+
+
+
+    // user role
+    const userRole = localStorage.getItem('userRole')
+    console.log(userRole)
 
     return (
         <div className="drawer lg:drawer-open">
@@ -28,8 +30,21 @@ const DashBoard = () => {
                         <div className="w-full pb-8">
                             <img src={logo} alt="" />
                         </div>
-                        {listOption}
-
+                        {userRole !== 'instructor' ?
+                            <>
+                                <li><Link to='/dashBoard'>Home</Link></li>
+                                <li><Link to='/dashBoard/selected-classes'>Selected Classes</Link></li>
+                                <li><Link to='/enrolled/classes'>Enrolled Classes</Link></li>
+                                <li><Link to='/dashBoard/payment'>Payment</Link></li>
+                            </>
+                            :
+                            <>
+                                <li><Link to='/dashBoard'>Home</Link></li>
+                                <li><Link to='/dashBoard/add-class'>Add Class</Link></li>
+                                <li><Link to='/dashBoard/my-classes'>My Classes</Link></li>
+                                <li><Link to='/dashBoard/payment'>Payment</Link></li>
+                            </>
+                        }
                     </div>
                     <div className="h-1/2 border-t-2 border-black pt-12">
                         <li><Link to='/'>Home</Link></li>

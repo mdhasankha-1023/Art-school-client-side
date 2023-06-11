@@ -11,6 +11,7 @@ import DashBoardHome from "../Pages/DashBoard/DashBoardHome/DashBoardHome";
 import SelectedClasses from "../Pages/DashBoard/SelectedClasses/SelectedClasses";
 import Payment from "../Pages/DashBoard/Payment/Payment";
 import PrivetRoute from "./PrivetRoute";
+import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 
 
   const router = createBrowserRouter([
@@ -61,6 +62,10 @@ import PrivetRoute from "./PrivetRoute";
             {
                 path: '/dashBoard/payment',
                 element: <Payment></Payment>
+            },
+            {
+                path: '/dashBoard/add-class',
+                element: <AddClass></AddClass>
             }
         ]
     }
