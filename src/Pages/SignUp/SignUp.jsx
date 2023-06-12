@@ -73,9 +73,22 @@ const SignUp = () => {
         googleSignIn()
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser)
-                navigate('/')
-                successAlert('Sign-up Successfully')
+                console.log(loggedUser.displayName)
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({ name: loggedUser.displayName, email: loggedUser.email, role: 'student', userImg: loggedUser.photoURL })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            navigate('/')
+                            successAlert('Sign-up Successfully')
+                        }
+                    })
+                    .catch(error => errorAlert(error.message))
             })
             .catch(error => errorAlert(error.message))
     }
