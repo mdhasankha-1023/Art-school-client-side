@@ -6,11 +6,14 @@ import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 
 
+const image_hosting_key = import.meta.env.VITE_SOME_IMAGE_HOSTING_KEY;
+
 const SignUp = () => {
     const { signUp, googleSignIn, errorAlert, successAlert, userProfileUpdate } = useAuth();
     const [clicked, setClicked] = useState(false);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const navigate = useNavigate();
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
     // handleCheckbox
     const handleCheckbox = () => {
@@ -19,37 +22,50 @@ const SignUp = () => {
 
 
     const onSubmit = data => {
-        const { name, email, password, photoUrl, checkbox } = data;
+        const { name, email, password, checkbox } = data;
         console.log(checkbox)
+        const formData = new FormData();
+        formData.append('image', data.userImg[0])
 
         // sing-up with email and password
-        signUp(email, password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser)
-                // update user profile
-                userProfileUpdate(name, photoUrl)
-                    .then(() => {
-                        fetch('http://localhost:5000/users', {
-                            method: 'POST',
-                            headers: {
-                                'content-type': 'application/json'
-                            },
-                            body: JSON.stringify({ name, email, role: 'student' })
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.insertedId) {
-                                    navigate('/login')
-                                    successAlert('Sign-up Successfully')
-                                }
-                            })
-                            .catch(error => errorAlert(error.message))
-                    })
-                    .catch(error => errorAlert(error.message))
+        fetch(img_hosting_url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgRes => {
+                if (imgRes.success) {
+                    signUp(email, password)
+                        .then(result => {
+                            const loggedUser = result.user;
+                            console.log(loggedUser)
+                            // update user profile
+                            userProfileUpdate(name, imgRes.data.display_url)
+                                .then(() => {
+                                    fetch('http://localhost:5000/users', {
+                                        method: 'POST',
+                                        headers: {
+                                            'content-type': 'application/json'
+                                        },
+                                        body: JSON.stringify({ name, email, role: 'student', userImg: imgRes.data.display_url, })
+                                    })
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            if (data.insertedId) {
+                                                navigate('/login')
+                                                successAlert('Sign-up Successfully')
+                                            }
+                                        })
+                                        .catch(error => errorAlert(error.message))
+                                })
+                                .catch(error => errorAlert(error.message))
 
+                        })
+                        .catch(error => errorAlert(error.message))
+                }
             })
             .catch(error => errorAlert(error.message))
+
     }
 
     // google sing-up
@@ -154,17 +170,14 @@ const SignUp = () => {
                                     </label>
                                 </div>
 
-                                {/* photo URL */}
+                                {/* Upload photo */}
                                 <div className="form-control relative">
                                     <label htmlFor="confirm-password" className="label">
-                                        <span className="label-text font-bold">Photo URL<span className="text-[#FF3131]">*</span></span>
+                                        <span className="label-text font-bold">Upload Photo<span className="text-[#FF3131]">*</span></span>
                                     </label>
-                                    <input
-                                        className="input input-bordered"
-                                        type='text'
-                                        {...register("photoUrl", { required: true })}
-                                    />
-                                    {errors.photoUrl && <p className="text-red-600">PhotoURL is required</p>}
+                                    <input type="file" className="file-input file-input-bordered file-input-md w-full"
+                                        {...register("userImg", { required: true })} />
+                                    {errors.userImg && <p className="text-red-600">Image is required</p>}
                                 </div>
                                 {/* button */}
                                 <div className="form-control mt-6">

@@ -65,9 +65,9 @@ const AddClass = () => {
                             <label htmlFor="classImage" className="label">
                                 <span className="label-text font-bold">Class Image<span className="text-[#FF3131]">*</span></span>
                             </label>
-                            <input type="file" className="file-input file-input-bordered file-input-md w-full"placeholder="type class name"
+                            <input type="file" className="file-input file-input-bordered file-input-md w-full"
                             {...register("classImage", { required: true })}/>
-                            {errors.classImage && <p className="text-red-600">classImage is required</p>}
+                            {errors.classImage && <p className="text-red-600">Image is required</p>}
                         </div>
                     </div>
 
@@ -126,16 +126,10 @@ const AddClass = () => {
                                 type='number'
                                 {...register('price')}
                                 placeholder="$00"
-
                             />
                             {errors.price && <p className="text-red-600">price is required</p>}
                         </div>
                     </div>
-
-
-
-
-
                     {/* button */}
                     <div className="form-control mt-6">
                         <button type="submit" className="btn bg-[#FF2B57] hover:bg-[#385777] text-white uppercase">Add</button>

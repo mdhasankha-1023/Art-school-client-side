@@ -1,4 +1,4 @@
-import { FaTrashAlt, FaUserShield } from "react-icons/fa";
+import { FaUserShield } from "react-icons/fa";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAllUsers from "../../../Hooks/useAllUsers";
 import useAuth from "../../../Hooks/useAuth";
