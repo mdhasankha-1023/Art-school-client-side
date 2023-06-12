@@ -6,36 +6,56 @@ import { FaArrowDown, FaPenSquare } from "react-icons/fa";
 
 
 const ManageClasses = () => {
-    const { user } = useAuth();
-    const [classes] = useClasses();
+    const { user, successAlert, errorAlert } = useAuth();
+    const [classes, refetch] = useClasses();
 
-
+    // handleChangedStatusBtn
+    const handleChangedStatusBtn = (id, value) => {
+        fetch(`http://localhost:5000/classes/${id}?status=${value}`, {
+            method: 'PATCH',
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount > 0) {
+                    refetch();
+                    successAlert('Status Changed Successfully')
+                }
+            })
+            .catch(error => errorAlert(error.message))
+    }
 
     // handleFeedbackBtn
     const handleFeedbackBtn = (id) => {
+
         Swal.fire({
-            title: 'Send feedback to user',
+            title: 'Write your feedback',
             input: 'text',
-            inputPlaceholder: 'Enter your feedback',
             showCancelButton: true,
             confirmButtonText: 'Submit',
         }).then((result) => {
             if (result.isConfirmed) {
-
-              fetch(`http://localhost:5000/classes/${id}`,{
-                method: 'PUT',
-                headers: {
-                    authorization :  `Bearer ${localStorage.getItem('jwt_token')}`
-                },
-                body: JSON.stringify(`${result.value}`)
-              })
-              .then(res => res.json())
-              .then(data => {
-                console.log(data)
-              })
+                // const feedback = result.value;
+                fetch(`http://localhost:5000/classes/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type' : 'application/json'
+                    },
+                    body: JSON.stringify({feedback: result.value})
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount > 0) {
+                            // refetch();
+                            successAlert('Feedback send successfully')
+                        }
+                    })
+                    .catch(error => errorAlert(error.message))
             }
-          });
+        })
     }
+
+
 
     return (
         <div className="w-full">
@@ -104,25 +124,31 @@ const ManageClasses = () => {
 
                                 {/* status */}
                                 <th className="text-center">
-                                    {
-                                        row.status === 'approved' ?
-                                            <div className="text-green-400">
-                                                {row.status}
-                                            </div>
-                                            :
-                                            <div className="text-yellow-400">
-                                                {row.status}
-                                            </div>
+                                    {row.status === 'approved' &&
+                                        <div className="text-green-400">
+                                            {row.status}
+                                        </div>
+                                    }
+                                    {row.status === 'deny' &&
+                                        <div className="text-[#FF3131]">
+                                            {row.status}
+                                        </div>
+                                    }
+                                    {row.status === 'pending' &&
+                                        <div className="text-yellow-400">
+                                            {row.status}
+                                        </div>
                                     }
                                 </th>
-                                <td className="text-center">
-                                    <button disabled={row.status === 'approved' && true} className="btn btn-sm border-0 bg-green-400">approved</button>
+                                <td onClick={() => handleChangedStatusBtn(row._id, 'approved')} className="text-center">
+                                    <button disabled={row.status !== 'pending' && true} className="btn btn-sm border-0 bg-green-400">approved</button>
                                 </td>
-                                <th className="text-center">
-                                    <button disabled={row.status === 'approved' && true} className="btn btn-sm border-0 bg-red-500">deny</button>
+                                <th onClick={() => handleChangedStatusBtn(row._id, 'deny')} className="text-center">
+                                    <button disabled={row.status !== 'pending' && true} className="btn btn-sm border-0 bg-red-500">deny</button>
                                 </th>
-                                <th className="text-center">
-                                    <div onClick={() => handleFeedbackBtn(row._id)} className="p-2 rounded-lg bg-[#FF3131] inline-block text-center text-xl text-white cursor-pointer"><FaPenSquare></FaPenSquare></div>
+                                <th onClick={() => handleFeedbackBtn(row._id)}
+                                    className="text-center">
+                                    <div className="p-2 rounded-lg bg-[#FF3131] inline-block text-center text-xl text-white cursor-pointer"><FaPenSquare></FaPenSquare></div>
                                 </th>
                             </tr>)
                         }

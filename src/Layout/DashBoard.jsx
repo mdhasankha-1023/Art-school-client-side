@@ -1,12 +1,13 @@
 import { Link, Outlet } from "react-router-dom";
 import logo from '../assets/logo/logo.png'
+import useSingleUser from "../Hooks/useSingleUser";
 
 
 const DashBoard = () => {
-
-
+    const [singleUser] = useSingleUser()
+    console.log(singleUser)
     // user role
-    const userRole = 'admin';
+    const userRole = singleUser.role;
 
     return (
         <div className="drawer lg:drawer-open">

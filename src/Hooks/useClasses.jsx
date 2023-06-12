@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const useClasses = () => {
-  const { data: classes = [] } = useQuery({
+  const { refetch, data: classes = [] } = useQuery({
     queryKey: ['classes'],
     queryFn: async () => {
       const res = await axios('http://localhost:5000/classes')
@@ -13,7 +13,7 @@ const useClasses = () => {
 
 
 
-  return [classes]
+  return [classes, refetch]
 };
 
 export default useClasses;
