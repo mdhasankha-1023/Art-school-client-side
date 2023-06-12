@@ -39,9 +39,9 @@ const ManageClasses = () => {
                 fetch(`http://localhost:5000/classes/${id}`, {
                     method: 'PUT',
                     headers: {
-                        'content-type' : 'application/json'
+                        'content-type': 'application/json'
                     },
-                    body: JSON.stringify({feedback: result.value})
+                    body: JSON.stringify({ feedback: result.value })
                 })
                     .then(res => res.json())
                     .then(data => {
@@ -148,7 +148,11 @@ const ManageClasses = () => {
                                 </th>
                                 <th onClick={() => handleFeedbackBtn(row._id)}
                                     className="text-center">
-                                    <div className="p-2 rounded-lg bg-[#FF3131] inline-block text-center text-xl text-white cursor-pointer"><FaPenSquare></FaPenSquare></div>
+                                    <button
+                                    disabled={row.status !== 'deny' && true}
+                                     className="btn btn-square border-0 bg-[#FF3131] text-white text-xl">
+                                        <FaPenSquare></FaPenSquare>
+                                    </button>
                                 </th>
                             </tr>)
                         }

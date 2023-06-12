@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
-import { FaCheck, FaClock, FaGraduationCap, FaPenSquare, FaRegCommentAlt } from "react-icons/fa";
+import { FaCheck, FaClock, FaPenSquare} from "react-icons/fa";
 
 
 const MyClasses = () => {
@@ -55,23 +55,31 @@ const MyClasses = () => {
                                 <td className="text-[#FF3131] font-bold">${row.price}</td>
                                 <th className="text-center">
                                     {
-                                        row.status !== 'pending' ?
+                                        row.status === 'pending' &&
                                             <div className="badge badge-warning p-3 cursor-pointer">
                                                 <FaClock className="me-2 text-xl"></FaClock> {row.status}
-                                            </div> :
-                                            <div className="badge badge-success p-3 cursor-pointer">
-                                                <FaCheck className="me-2 text-xl"></FaCheck> {row.status}
                                             </div>
 
                                     }
+                                    {  row.status === 'approved' &&
+                                    <div className="badge badge-success p-3 cursor-pointer">
+                                        <FaCheck className="me-2 text-xl"></FaCheck> {row.status}
+                                    </div>}
+                                    {  row.status === 'deny' &&
+                                    <div className="badge bg-[#FF3131] p-3 cursor-pointer">
+                                        <FaCheck className="me-2 text-xl"></FaCheck> {row.status}
+                                    </div>}
                                 </th>
                                 <td className="text-center">
-                                <div className="p-2 rounded-lg bg-[#FF3131] inline-block text-center text-xl text-white cursor-pointer">
-                                    <FaGraduationCap></FaGraduationCap>
-                                </div>
+                                    <p>{row.numberOfStudents}</p>
                                 </td>
                                 <th className="text-center">
-                                    <div className="p-2 rounded-lg bg-[#FF3131] inline-block text-center text-xl text-white cursor-pointer"><FaRegCommentAlt></FaRegCommentAlt></div>
+                                    {
+                                        row.adminFeedback === '' ?
+                                        <p>No feedback</p>
+                                        :
+                                        <p>{row.adminFeedback}</p>
+                                    }
                                 </th>
                                 <th className="text-center">
                                     <div className="p-2 rounded-lg bg-[#FF3131] inline-block text-center text-xl text-white cursor-pointer"><FaPenSquare></FaPenSquare></div>

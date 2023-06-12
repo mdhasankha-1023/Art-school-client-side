@@ -6,7 +6,7 @@ import axios from "axios";
 const image_hosting_key= import.meta.env.VITE_SOME_IMAGE_HOSTING_KEY;
 const AddClass = () => {
     const { user, successAlert, errorAlert } = useAuth();
-    const { register, handleSubmit,  formState: { errors } } = useForm();
+    const { register, handleSubmit, reset ,  formState: { errors } } = useForm();
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
     // handle add-class form
@@ -24,12 +24,14 @@ const AddClass = () => {
             
             if(imgRes.success){
                 const students = 0;
+                const feedback = '';
                 const {className, name, email, availableSeat, price } = data;
-                const newClass = { name, className,  email, availableSeat,  price, classImg: imgRes.data.display_url, numberOfStudents: students, status: 'Pending'}
+                const newClass = { name, className,  email, availableSeat,  price, classImg: imgRes.data.display_url, numberOfStudents: students, status: 'pending', adminFeedback: feedback}
                 axios.post('http://localhost:5000/classes', newClass)
                 .then(res => {
                     if(res.data.insertedId){
                         successAlert('Added successfully')
+                        reset();
                     }
                 })
                 .catch(error => errorAlert(error.message))
