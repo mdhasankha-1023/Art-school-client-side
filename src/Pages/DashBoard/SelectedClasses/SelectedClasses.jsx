@@ -4,14 +4,14 @@ import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useSelectedClasses from "../../../Hooks/useSelectedClasses";
+import usePaymentClass from "../../../Hooks/usePaymentClass";
+
 
 
 const SelectedClasses = () => {
     const { user, errorAlert, successAlert } = useAuth();
     const [selectedClasses, refetch] = useSelectedClasses();
     const navigate = useNavigate();
-
-
 
     // handleDeleteBtn
     const handleDeleteBtn = (id) => {
@@ -42,16 +42,10 @@ const SelectedClasses = () => {
     }
 
     // handlePayBtn
-    const handlePayBtn = (id) => {
-        fetch(`http://localhost:5000/added-class/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                navigate('/dashBoard/payment')
-            })
-            .catch()
-
-    }
+    const HandlePayBtn = (id) => {
+        usePaymentClass(id);
+        navigate('/dashBoard/payment')
+      };
 
 
     return (
@@ -92,7 +86,7 @@ const SelectedClasses = () => {
                                 <td className="text-xl">{row.Instructor}</td>
                                 <td className="text-[#FF3131] font-bold">${row.Price}</td>
                                 <th>
-                                    <div onClick={() => handlePayBtn(row._id)} className="badge badge-warning p-3 cursor-pointer">
+                                    <div onClick={() => HandlePayBtn(row._id)} className="badge badge-warning p-3 cursor-pointer">
                                         Pay now
                                     </div>
                                 </th>
@@ -103,9 +97,9 @@ const SelectedClasses = () => {
                         }
                     </tbody>
                 </table>
-                    {
-                        selectedClasses.length === 0 && <h1 className="text-center mt-24 text-2xl font-bold text-gray-400">No Classes Available Here...</h1>
-                    }
+                {
+                    selectedClasses.length === 0 && <h1 className="text-center mt-24 text-2xl font-bold text-gray-400">No Classes Available Here...</h1>
+                }
             </div>
         </div>
     );

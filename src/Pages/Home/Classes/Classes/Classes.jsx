@@ -6,6 +6,14 @@ import Class from "../Class/Class";
 const Classes = () => {
     const [classes] = useClasses();
     const approvedClasses = classes?.filter(c => c.status === 'approved')
+
+    // handleHighPrice
+    // const handleSortBtn = (id, value) => {
+    //     console.log(value)
+    // }
+
+
+
     return (
         <div>
             <Cover mainHeading={"All Classes"} subHeading={"Classes"}></Cover>
@@ -20,10 +28,10 @@ const Classes = () => {
                 </div>
                 <div className="form-control">
                     <div className="input-group">
-                        <select className="select select-bordered">
+                        <select  className="select select-bordered">
                             <option disabled selected>Filter By</option>
-                            <option>High-price</option>
-                            <option>Low Price</option>
+                            <option >High-price</option>
+                            <option >Low Price</option>
                         </select>
                     </div>
                 </div>
