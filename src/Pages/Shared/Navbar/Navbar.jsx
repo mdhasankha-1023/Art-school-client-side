@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/logo/logo.png'
 import useAuth from '../../../Hooks/useAuth';
 import { FaUserAlt } from 'react-icons/fa';
+import ActiveRoute from '../../../Routes/ActiveRoute';
 
 const Navbar = () => {
     const { user, logOut, successAlert, errorAlert } = useAuth();
@@ -22,19 +23,19 @@ const Navbar = () => {
     }
 
     const NavLink = <>
-        <li><Link to='/'>Home</Link></li>
-        <li tabIndex={0}><Link to='/instructors'>Instructors</Link></li>
-        <li><Link to='/classes'>Classes</Link></li>
+        <li className='me-3'><ActiveRoute to='/'>Home</ActiveRoute></li>
+        <li className='me-3' tabIndex={0}><ActiveRoute to='/instructors'>Instructors</ActiveRoute></li>
+        <li className='me-3'><ActiveRoute to='/classes'>Classes</ActiveRoute></li>
         {
-            user && <li><Link to='/dashBoard'>Dashboard</Link></li>
+            user && <li className='me-3'><ActiveRoute to='/dashBoard'>Dashboard</ActiveRoute></li>
         }
         <div className='flex flex-col gap-4 md:hidden'>
-            <Link to='/login'>
+            <ActiveRoute to='/login'>
                 <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white me-4">Login</button>
-            </Link>
-            <Link to='/sign-up'>
+            </ActiveRoute>
+            <ActiveRoute to='/sign-up'>
                 <button className="btn btn-outline btn-sm border-0 bg-[#FF2B57] hover:bg-[#385777] text-white">Sign-up</button>
-            </Link>
+            </ActiveRoute>
         </div>
     </>
 

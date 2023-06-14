@@ -28,7 +28,7 @@ const DashBoard = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 h-full bg-[#FEEFDC] text-base-content">
+                    <ul className="menu p-4 w-full flex-nowrap h-full bg-[#FEEFDC] text-base-content">
                         {/* Sidebar content here */}
                         <div className="h-1/2">
                             <div className="w-full pb-8">
@@ -56,7 +56,8 @@ const DashBoard = () => {
                             </>
                             }
                         </div>
-                        <div className="h-1/2 border-t-2 border-black pt-12">
+                        <div className="border-2 border-black my-5"></div>
+                        <div className="h-1/2 border-black pt-12">
                             <li><Link to='/'>Home</Link></li>
                             <li><Link to='/instructors'>Instructors</Link></li>
                             <li><Link to='/classes'>Classes</Link></li>
