@@ -1,8 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import Cover from "../../../Components/Cover/Cover";
+import Instructor from "../Instructor/Instructor";
+import useInstructors from "../../../Hooks/useInstructors";
 
 
 const Instructors = () => {
+    const [instructors] = useInstructors();
 
     return (
         <div>
@@ -30,12 +33,12 @@ const Instructors = () => {
                 </div>
             </div>
             <div className="mt-10 mb-20 max-w-screen-lg mx-auto grid grid-cols-3 gap-4">
-                {/* {
+                {
                     instructors.map(i => <Instructor
                         key={i._id}
                         item={i}
                     ></Instructor>)
-                } */}
+                }
             </div>
 
         </div>

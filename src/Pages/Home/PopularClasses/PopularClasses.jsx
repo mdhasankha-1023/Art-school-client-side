@@ -4,8 +4,6 @@ import useClasses from "../../../Hooks/useClasses"
 const PopularClasses = () => {
     const [classes] = useClasses();
     const sortClasses = classes.slice(0, 6)
-    console.log(classes)
-
 
     return (
         <div className="max-w-screen-lg mx-auto my-20">

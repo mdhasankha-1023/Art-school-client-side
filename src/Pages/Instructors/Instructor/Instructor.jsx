@@ -2,6 +2,8 @@
 
 const Instructor = ({ item }) => {
     const { name, email, image, numberOfClasses } = item;
+
+    
     return (
         <div className="card w-full shadow-xl bg-base-100">
             <figure className="h-[50%] relative">

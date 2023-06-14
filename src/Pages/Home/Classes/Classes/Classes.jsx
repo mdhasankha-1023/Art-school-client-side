@@ -9,6 +9,7 @@ const Classes = () => {
     const approvedClasses = classes?.filter(c => c.status === 'approved')
 
 
+
     return (
         <div>
             <Helmet>

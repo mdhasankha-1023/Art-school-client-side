@@ -5,9 +5,6 @@ import useSelectedClasses from "../../../Hooks/useSelectedClasses";
 const EnrolledClasses = () => {
     const [selectedClasses] = useSelectedClasses();
     const payedClasses = selectedClasses.filter(c => c.paymentStatus === true)
-    console.log(payedClasses)
-
-
 
     return (
         <>

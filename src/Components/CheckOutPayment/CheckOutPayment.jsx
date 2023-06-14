@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const CheckOutPayment = ({ paymentClass }) => {
-    const {Price, _id , Name, email} = paymentClass;
+    const { Price, _id, Name, email } = paymentClass;
     const { successAlert, errorAlert } = useAuth();
     const stripe = useStripe();
     const elements = useElements();
@@ -20,7 +20,7 @@ const CheckOutPayment = ({ paymentClass }) => {
 
     useEffect(() => {
         if (Price > 0) {
-            axiosSecure.post('/create-payment-intent', { Price})
+            axiosSecure.post('/create-payment-intent', { Price })
                 .then(res => {
                     setClientSecret(res.data.clientSecret)
                     // setClientSecret(res.data.paymentIntent.client_secret)
@@ -65,7 +65,7 @@ const CheckOutPayment = ({ paymentClass }) => {
                     card: card,
                     billing_details: {
                         email: email || 'email not found',
-                        name: Name ||   'name not found'
+                        name: Name || 'name not found'
                     },
                 },
             },
@@ -84,23 +84,23 @@ const CheckOutPayment = ({ paymentClass }) => {
                 date: new Date(),
                 methods: 'stripe',
                 name: Name,
-            } 
+            }
             axiosSecure.post('/payments', paymentInfo)
-            .then(res => {
-                console.log(res.data)
-                if(res.data.insertedId){
-                    fetch(`http://localhost:5000/added-classes/${_id}`, {
-                    method: 'PATCH',
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertedId) {
+                        fetch(`http://localhost:5000/added-classes/${_id}`, {
+                            method: 'PATCH',
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data)
+                                if (data.modifiedCount > 0) {
+                                    navigate('/dashBoard/selected-classes')
+                                }
+                            })
+                    }
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data)
-                        if (data.modifiedCount > 0) {
-                            navigate('/dashBoard/selected-classes')
-                        }
-                    })
-                }
-            })
         }
 
     }
