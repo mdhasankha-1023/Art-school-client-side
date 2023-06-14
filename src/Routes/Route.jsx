@@ -10,13 +10,15 @@ import DashBoard from "../Layout/DashBoard";
 import DashBoardHome from "../Pages/DashBoard/DashBoardHome/DashBoardHome";
 import SelectedClasses from "../Pages/DashBoard/SelectedClasses/SelectedClasses";
 import Payment from "../Pages/DashBoard/Payment/Payment";
-import PrivetRoute from "./PrivetRoute";
 import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 import MyClasses from "../Pages/DashBoard/MyClasses/MyClasses";
 import ManageClasses from "../Pages/DashBoard/ManageClasses/ManageClasses";
 import ManageUsers from "../Pages/DashBoard/ManageUsers/ManageUsers";
 import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
 import EnrolledClasses from "../Pages/DashBoard/EnrolledClasses/EnrolledClasses";
+import AdminRoute from "./AdminRoute";
+import PrivetRoute from "./PrivetRoute";
+import InstructorRoute from "./InstructorRoute";
 
 
   const router = createBrowserRouter([
@@ -70,19 +72,19 @@ import EnrolledClasses from "../Pages/DashBoard/EnrolledClasses/EnrolledClasses"
             },
             {
                 path: '/dashBoard/add-class',
-                element: <AddClass></AddClass>
+                element: <InstructorRoute><AddClass></AddClass></InstructorRoute>
             },
             {
                 path: '/dashBoard/my-classes',
-                element: <MyClasses></MyClasses>
+                element: <InstructorRoute><MyClasses></MyClasses></InstructorRoute>
             },
             {
                 path: '/dashBoard/manage-classes',
-                element: <ManageClasses></ManageClasses>
+                element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>
             },
             {
                 path: '/dashBoard/manage-users',
-                element: <ManageUsers></ManageUsers>
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
             {
                 path: '/dashBoard/payment-history',

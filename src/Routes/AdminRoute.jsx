@@ -1,11 +1,15 @@
-import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "../Hooks/useAuth";
 import { MagnifyingGlass } from "react-loader-spinner";
+import useAuth from "../Hooks/useAuth";
+import { Navigate, useLocation } from "react-router-dom";
+import useAllUsers from "../Hooks/useAllUsers";
 
 
-const PrivetRoute = ({children}) => {
+const AdminRoute = ({children}) => {
     const {user, loading} = useAuth()
     const location = useLocation();
+    const [allUsers] = useAllUsers();
+    const currentUser = allUsers.filter(c => c.email === user.email)
+    console.log(currentUser[0])
 
     if(loading){
         return <MagnifyingGlass
@@ -22,11 +26,11 @@ const PrivetRoute = ({children}) => {
 
 
 
-    if(user){
+    if(user && currentUser[0]?.role === 'admin'){
         return children;
     }
 
     return  <Navigate to="/" state={{from: location}} replace></Navigate>
 };
 
-export default PrivetRoute;
+export default AdminRoute;

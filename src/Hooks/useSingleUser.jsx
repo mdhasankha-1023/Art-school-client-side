@@ -3,10 +3,11 @@ import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useSingleUser = () => {
-    const {user} = useAuth();
+    const {user, loading} = useAuth();
     const [axiosSecure] = useAxiosSecure();
     const {data: singleUser = []} = useQuery({
         queryKey: ['user', user?.email],
+        enabled: !loading,
         queryFn: async() => {
             const res = await axiosSecure(`/users/${user?.email}`)
             return res.data;
