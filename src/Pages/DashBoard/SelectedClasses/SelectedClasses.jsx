@@ -4,6 +4,7 @@ import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useSelectedClasses from "../../../Hooks/useSelectedClasses";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -41,12 +42,16 @@ const SelectedClasses = () => {
     }
 
     // handlePayBtn
-    const HandlePayBtn = () => {
-        navigate('/dashBoard/payment')
-      };
+    const HandlePayBtn = (id) => {
+        navigate(`/dashBoard/payment/${id}`)
+    };
 
 
-    return (
+return (
+    <>
+        <Helmet>
+            <title>Art-School || Selected Classes</title>
+        </Helmet>
         <div className="w-11/12 mx-auto">
             <SectionTitle mainHeading={"Your selected Classes"} topHeading={` Hay, ${user.displayName}`}></SectionTitle>
             <div className="overflow-x-auto my-24">
@@ -100,7 +105,8 @@ const SelectedClasses = () => {
                 }
             </div>
         </div>
-    );
+    </>
+);
 };
 
 export default SelectedClasses;

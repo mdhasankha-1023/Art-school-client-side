@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Cover from "../../../../Components/Cover/Cover";
 import useClasses from "../../../../Hooks/useClasses";
 import Class from "../Class/Class";
@@ -16,6 +17,9 @@ const Classes = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Art-School || classes</title>
+            </Helmet>
             <Cover mainHeading={"All Classes"} subHeading={"Classes"}></Cover>
             <div className="flex justify-between md:flex-row flex-col items-center max-w-screen-lg mx-auto mt-20 gap-4">
                 <div className="form-control">

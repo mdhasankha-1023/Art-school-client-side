@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Cover from "../../../Components/Cover/Cover";
 
 
@@ -5,6 +6,9 @@ const Instructors = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Art-School || Instructors</title>
+            </Helmet>
             <Cover mainHeading={"All Instructors"} subHeading={"Instructors"}></Cover>
             <div className="flex justify-between max-w-screen-lg mx-auto mt-20">
                 <div className="form-control">

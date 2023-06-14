@@ -15,6 +15,7 @@ import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 import MyClasses from "../Pages/DashBoard/MyClasses/MyClasses";
 import ManageClasses from "../Pages/DashBoard/ManageClasses/ManageClasses";
 import ManageUsers from "../Pages/DashBoard/ManageUsers/ManageUsers";
+import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
 
 
   const router = createBrowserRouter([
@@ -63,7 +64,7 @@ import ManageUsers from "../Pages/DashBoard/ManageUsers/ManageUsers";
                 element: <SelectedClasses></SelectedClasses>
             },
             {
-                path: '/dashBoard/payment',
+                path: '/dashBoard/payment/:id',
                 element: <Payment></Payment>
             },
             {
@@ -81,6 +82,10 @@ import ManageUsers from "../Pages/DashBoard/ManageUsers/ManageUsers";
             {
                 path: '/dashBoard/manage-users',
                 element: <ManageUsers></ManageUsers>
+            },
+            {
+                path: '/dashBoard/payment-history',
+                element: <PaymentHistory></PaymentHistory>
             }
         ]
     }

@@ -5,7 +5,9 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 
 
-const CheckOutPayment = ({ totalPrice }) => {
+const CheckOutPayment = ({ paymentClass }) => {
+    const {Price, _id , Name, email} = paymentClass;
+    console.log(paymentClass)
     const { successAlert, errorAlert } = useAuth();
     const stripe = useStripe();
     const elements = useElements();
@@ -18,14 +20,14 @@ const CheckOutPayment = ({ totalPrice }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (totalPrice > 0) {
-            axiosSecure.post('/create-payment-intent', { totalPrice })
+        if (Price > 0) {
+            axiosSecure.post('/create-payment-intent', { Price})
                 .then(res => {
                     setClientSecret(res.data.clientSecret)
                     // setClientSecret(res.data.paymentIntent.client_secret)
                 })
         }
-    }, [totalPrice, axiosSecure]);
+    }, [Price, axiosSecure]);
 
 
     // handle stripe form
@@ -63,8 +65,8 @@ const CheckOutPayment = ({ totalPrice }) => {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        email: user?.email || 'email not found',
-                        name: user?.displayName || 'name not found'
+                        email: email || 'email not found',
+                        name: Name ||   'name not found'
                     },
                 },
             },
@@ -80,12 +82,22 @@ const CheckOutPayment = ({ totalPrice }) => {
             const paymentInfo = {
                 email: user.email,
                 transactionId: paymentIntent.id,
-                date: new Date()
+                date: new Date(),
+                methods: 'stripe',
+                name: Name,
             } 
             axiosSecure.post('/payments', paymentInfo)
             .then(res => {
                 if(res.data.insertedId){
-                    navigate('/dashBoard/selected-classes')
+                    fetch(`http://localhost:5000/added-class/${_id}`, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            navigate('/dashBoard/selected-classes')
+                        }
+                    })
                 }
             })
         }
