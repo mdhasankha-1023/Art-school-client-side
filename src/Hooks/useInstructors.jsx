@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useInstructors = () => {
     const { refetch, data: instructors = [] } = useQuery({
-        queryKey: ['classes'],
+        queryKey: ['instructors'],
         queryFn: async () => {
           const res = await axios('http://localhost:5000/instructors')
           return res.data;

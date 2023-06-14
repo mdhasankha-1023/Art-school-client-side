@@ -27,7 +27,7 @@ const Classes = () => {
                 </div>
                 <div className="form-control">
                     <div className="input-group">
-                        <select  className="select select-bordered">
+                        <select defaultValue={'Filter By'}  className="select select-bordered">
                             <option disabled selected>Filter By</option>
                             <option >High-price</option>
                             <option >Low Price</option>
