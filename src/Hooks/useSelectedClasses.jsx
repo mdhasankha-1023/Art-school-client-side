@@ -8,7 +8,7 @@ const useSelectedClasses = () => {
     const { user } = useAuth();
 
     const { refetch, data: selectedClasses = [] } = useQuery({
-        queryKey: ['class', user?.email],
+        queryKey: ['added-classes', user?.email],
         queryFn: async () => {
             const res = await axiosSecure(`/added-classes?email=${user?.email}`)
             return res.data;

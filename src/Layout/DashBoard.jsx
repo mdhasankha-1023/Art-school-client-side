@@ -5,7 +5,7 @@ import useSingleUser from "../Hooks/useSingleUser";
 
 const DashBoard = () => {
     const [singleUser] = useSingleUser()
-    console.log(singleUser)
+
     // user role
     const userRole = singleUser.role;
 

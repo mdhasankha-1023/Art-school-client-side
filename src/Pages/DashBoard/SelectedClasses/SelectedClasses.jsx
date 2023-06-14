@@ -4,7 +4,6 @@ import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useSelectedClasses from "../../../Hooks/useSelectedClasses";
-import usePaymentClass from "../../../Hooks/usePaymentClass";
 
 
 
@@ -42,8 +41,7 @@ const SelectedClasses = () => {
     }
 
     // handlePayBtn
-    const HandlePayBtn = (id) => {
-        usePaymentClass(id);
+    const HandlePayBtn = () => {
         navigate('/dashBoard/payment')
       };
 

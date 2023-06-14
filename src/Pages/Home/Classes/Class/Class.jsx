@@ -13,7 +13,7 @@ const Class = ({ item }) => {
 
     // handleSelectBtn
     const handleSelectBtn = () => {
-        const addedClass = { addedClass_id: _id, Image: classImg, Name: className, Instructor: name, Price: price, email: user.email }
+        const addedClass = { addedClass_id: _id, Image: classImg, Name: className, Instructor: name, Price: price, email: user?.email }
         if (user) {
             fetch('http://localhost:5000/added-classes', {
                 method: 'POST',
@@ -30,9 +30,9 @@ const Class = ({ item }) => {
                 })
                 .catch(error => errorAlert(error.message))
         }
-        else {
+        else if(!user){
             Swal.fire({
-                title: 'First Login',
+                title: 'First, you need to login',
                 text: "You are not select this",
                 icon: 'warning',
                 showCancelButton: true,
@@ -45,6 +45,7 @@ const Class = ({ item }) => {
                 }
             })
         }
+        
     }
 
 
@@ -63,7 +64,8 @@ const Class = ({ item }) => {
                 <p className="font-bold">Enrolled student: {numberOfStudents}</p>
                 <div className="flex justify-between items-center border-t-2 pt-2">
                     <div>
-                        <button onClick={handleSelectBtn} disabled={availableSeat === 0 || singleUser.role !== 'student' ? true : false} className="btn bg-[#385777] border-0 text-white btn-md">Select</button>
+                        <button onClick={handleSelectBtn} disabled= { user ? (availableSeat === 0 || singleUser.role !== 'student') : false}
+                         className="btn bg-[#385777] border-0 text-white btn-md">Select</button>
                     </div>
                     <div className="card-actions justify-end">
                         <p className="text-[#FF3131] text-2xl font-bold">${price}</p>

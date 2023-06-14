@@ -7,8 +7,6 @@ const axiosSecure = axios.create({
     baseURL: 'http://localhost:5000'
 });
 
-
-
 const useAxiosSecure = () => {
     const {logOut} = useAuth();
     // const navigate = useNavigate();
@@ -35,7 +33,7 @@ const useAxiosSecure = () => {
 
 
 
-    return [axiosSecure]
+    return [axiosSecure]    
 };
 
 export default useAxiosSecure;

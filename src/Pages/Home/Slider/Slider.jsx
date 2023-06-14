@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import slider1 from '../../../assets/slider/slider1.jpg'
 import slider2 from '../../../assets/slider/slider2.jpg'
 import slider3 from '../../../assets/slider/slider3.jpg'
@@ -10,8 +9,8 @@ import { Fade, Slide } from "react-awesome-reveal";
 const Slider = () => {
 
     return (
-        <div className="bg-[#FEEFDC] mt-3 py-24 px-8 md:flex">
-            <div className="w-1/2">
+        <div className="bg-[#FEEFDC] mt-3 py-8 md:py-24 px-8 md:flex">
+            <div className="md:w-1/2 w-full">
                 <div className='mt-8'>
                     <Fade cascade>
                         <p className="uppercase my-4">-------Learn from professional</p>
@@ -23,13 +22,9 @@ const Slider = () => {
                     <Slide>
                         <button className="btn bg-[#FF1949] text-white my-8">Join for free</button>
                     </Slide>
-
-
-
-
                 </div>
             </div>
-            <div className='w-1/2'>
+            <div className='md:w-1/2 w-full'>
                 <div className="carousel w-full">
                     <div id="item1" className="carousel-item w-full">
                         <img src={slider1} className="w-full" />
@@ -59,6 +54,7 @@ const Slider = () => {
                     <a href="#item6" className="btn btn-xs">6</a>
                 </div>
             </div>
+
         </div>
     );
 };

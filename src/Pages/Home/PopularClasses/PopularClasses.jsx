@@ -1,17 +1,26 @@
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
-import useClasses from "../../../Hooks/useClasses";
-
-
-
+import useClasses from "../../../Hooks/useClasses"
 
 const PopularClasses = () => {
     const [classes] = useClasses();
-    const totalPrice = classes.reduce( (sum, item) => item.Price + sum ,0)
-    console.log(totalPrice)
+    const sortClasses = classes.slice(0, 6)
+    console.log(classes)
+
 
     return (
         <div className="max-w-screen-lg mx-auto my-20">
             <SectionTitle topHeading={'Learning Skills'} mainHeading={'Our Popular Classes'}></SectionTitle>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 p-4">
+                {
+                    sortClasses.map(c => <div key={c._id} className="relative">
+                            <img className="h-[300px] w-full cursor-pointer" src={c.classImg} alt="" />
+                            <div className="absolute bottom-0 py-2 bg-[#FF1949] opacity-70 text-white w-full text-center text-xl font-bold">
+                                <p>{c.className}</p>
+                                <p>students: {c.numberOfStudents}</p>
+                            </div>
+                    </div>)
+                }
+            </div>
         </div>
     );
 };
