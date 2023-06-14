@@ -12,7 +12,7 @@ const ManageUsers = () => {
     // handleInstructorBtn
     const handleInstructorBtn = (id, role) => {
         
-        fetch(`http://localhost:5000/users/${id}?role=${role}`,{
+        fetch(`https://art-school-server.vercel.app/users/${id}?role=${role}`,{
             method: 'PATCH',
         })
         .then(res => res.json())

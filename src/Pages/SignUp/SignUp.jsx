@@ -42,7 +42,7 @@ const SignUp = () => {
                             // update user profile
                             userProfileUpdate(name, imgRes.data.display_url)
                                 .then(() => {
-                                    fetch('http://localhost:5000/users', {
+                                    fetch('https://art-school-server.vercel.app/users', {
                                         method: 'POST',
                                         headers: {
                                             'content-type': 'application/json'
@@ -74,7 +74,7 @@ const SignUp = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser.displayName)
-                fetch('http://localhost:5000/users', {
+                fetch('https://art-school-server.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

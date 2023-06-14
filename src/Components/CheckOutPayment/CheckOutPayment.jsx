@@ -89,7 +89,7 @@ const CheckOutPayment = ({ paymentClass }) => {
                 .then(res => {
                     console.log(res.data)
                     if (res.data.insertedId) {
-                        fetch(`http://localhost:5000/added-classes/${_id}`, {
+                        fetch(`https://art-school-server.vercel.app/added-classes/${_id}`, {
                             method: 'PATCH',
                         })
                             .then(res => res.json())

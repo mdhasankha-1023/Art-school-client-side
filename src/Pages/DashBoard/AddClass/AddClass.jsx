@@ -27,7 +27,7 @@ const AddClass = () => {
                 const feedback = '';
                 const {className, name, email, availableSeat, price } = data;
                 const newClass = { name, className,  email, availableSeat,  price, classImg: imgRes.data.display_url, numberOfStudents: students, status: 'pending', adminFeedback: feedback}
-                axios.post('http://localhost:5000/classes', newClass)
+                axios.post('https://art-school-server.vercel.app/classes', newClass)
                 .then(res => {
                     if(res.data.insertedId){
                         successAlert('Added successfully')

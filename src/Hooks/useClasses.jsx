@@ -6,7 +6,7 @@ const useClasses = () => {
   const { refetch, data: classes = [] } = useQuery({
     queryKey: ['classes'],
     queryFn: async () => {
-      const res = await axios('http://localhost:5000/classes')
+      const res = await axios('https://art-school-server.vercel.app/classes')
       return res.data;
     }
   })

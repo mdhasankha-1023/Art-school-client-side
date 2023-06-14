@@ -42,7 +42,7 @@ const AuthProvider = ({children}) => {
             setLoading(false)
             // get jwt token
             if(currentUser){
-                axios.post('http://localhost:5000/jwt', {email: currentUser.email})
+                axios.post('https://art-school-server.vercel.app/jwt', {email: currentUser.email})
                 .then(data => {
                     localStorage.setItem('jwt_token', data.data.token)
                 })
