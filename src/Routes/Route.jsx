@@ -19,12 +19,14 @@ import EnrolledClasses from "../Pages/DashBoard/EnrolledClasses/EnrolledClasses"
 import AdminRoute from "./AdminRoute";
 import PrivetRoute from "./PrivetRoute";
 import InstructorRoute from "./InstructorRoute";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 
   const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children:[
             {
                 path: '/',
@@ -43,6 +45,7 @@ import InstructorRoute from "./InstructorRoute";
     {
         path: '/',
         element: <Others></Others>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/login',
@@ -57,6 +60,7 @@ import InstructorRoute from "./InstructorRoute";
     {
         path: '/dashBoard',
         element: <PrivetRoute><DashBoard></DashBoard></PrivetRoute>,
+        errorElement: <ErrorPage></ErrorPage>,
         children:[
             {
                 path: '/dashBoard',

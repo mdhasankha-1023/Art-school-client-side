@@ -8,6 +8,7 @@ import OurCourses from "../OurCourses/OurCourses";
 
 
 const Home = () => {
+
     return (
         <div>
             <Helmet>
