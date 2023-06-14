@@ -38,7 +38,7 @@ const DashBoard = () => {
                                 <>
                                     <li><Link to='/dashBoard'>Home</Link></li>
                                     <li><Link to='/dashBoard/selected-classes'>Selected Classes</Link></li>
-                                    <li><Link to='/enrolled/classes'>Enrolled Classes</Link></li>
+                                    <li><Link to='/dashBoard/enrolled-classes'>Enrolled Classes</Link></li>
                                     <li><Link to='/dashBoard/payment'>Payment</Link></li>
                                     <li><Link to='/dashBoard/payment-history'>Payment History</Link></li>
                                 </>

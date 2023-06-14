@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const CheckOutPayment = ({ paymentClass }) => {
     const {Price, _id , Name, email} = paymentClass;
-    console.log(paymentClass)
     const { successAlert, errorAlert } = useAuth();
     const stripe = useStripe();
     const elements = useElements();
@@ -88,13 +87,15 @@ const CheckOutPayment = ({ paymentClass }) => {
             } 
             axiosSecure.post('/payments', paymentInfo)
             .then(res => {
+                console.log(res.data)
                 if(res.data.insertedId){
-                    fetch(`http://localhost:5000/added-class/${_id}`, {
-                    method: 'DELETE',
+                    fetch(`http://localhost:5000/added-classes/${_id}`, {
+                    method: 'PATCH',
                 })
                     .then(res => res.json())
                     .then(data => {
-                        if (data.deletedCount > 0) {
+                        console.log(data)
+                        if (data.modifiedCount > 0) {
                             navigate('/dashBoard/selected-classes')
                         }
                     })

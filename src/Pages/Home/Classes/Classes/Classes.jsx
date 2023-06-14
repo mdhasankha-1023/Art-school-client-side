@@ -8,12 +8,6 @@ const Classes = () => {
     const [classes] = useClasses();
     const approvedClasses = classes?.filter(c => c.status === 'approved')
 
-    // handleHighPrice
-    // const handleSortBtn = (id, value) => {
-    //     console.log(value)
-    // }
-
-
 
     return (
         <div>

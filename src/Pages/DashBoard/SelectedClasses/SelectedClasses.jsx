@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet-async";
 const SelectedClasses = () => {
     const { user, errorAlert, successAlert } = useAuth();
     const [selectedClasses, refetch] = useSelectedClasses();
+    const notPayClasses = selectedClasses.filter(c => c.paymentStatus === false)
     const navigate = useNavigate();
 
     // handleDeleteBtn
@@ -33,6 +34,7 @@ const SelectedClasses = () => {
                         if (data.deletedCount > 0) {
                             successAlert('Successfully deleted')
                             refetch()
+                            console.log()
                         }
                     })
                     .catch(error => errorAlert(error.message))
@@ -70,7 +72,7 @@ return (
                     <tbody>
                         {/* row 1 */}
                         {
-                            selectedClasses.map((row, index) => <tr
+                            notPayClasses.map((row, index) => <tr
                                 key={row._id}
                             >
                                 <th>{index + 1}</th>
@@ -101,7 +103,7 @@ return (
                     </tbody>
                 </table>
                 {
-                    selectedClasses.length === 0 && <h1 className="text-center mt-24 text-2xl font-bold text-gray-400">No Classes Available Here...</h1>
+                    notPayClasses.length === 0 && <h1 className="text-center mt-24 text-2xl font-bold text-gray-400">No Classes Available Here...</h1>
                 }
             </div>
         </div>

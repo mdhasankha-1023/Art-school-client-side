@@ -13,7 +13,7 @@ const Class = ({ item }) => {
 
     // handleSelectBtn
     const handleSelectBtn = () => {
-        const addedClass = { addedClass_id: _id, Image: classImg, Name: className, Instructor: name, Price: price, email: user?.email }
+        const addedClass = { addedClass_id: _id, Image: classImg, Name: className, Instructor: name, Price: price, email: user?.email, paymentStatus: false}
         if (user) {
             fetch('http://localhost:5000/added-classes', {
                 method: 'POST',
