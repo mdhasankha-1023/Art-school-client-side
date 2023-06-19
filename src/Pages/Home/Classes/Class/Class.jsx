@@ -15,7 +15,7 @@ const Class = ({ item }) => {
     const handleSelectBtn = () => {
         const addedClass = { addedClass_id: _id, Image: classImg, Name: className, Instructor: name, Price: price, email: user?.email, paymentStatus: false}
         if (user) {
-            fetch('https://art-school-server.vercel.app/added-classes', {
+            fetch('http://localhost:5000/added-classes', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
