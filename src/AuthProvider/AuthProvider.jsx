@@ -35,6 +35,11 @@ const AuthProvider = ({children}) => {
           })
     }
 
+    // theme change condition
+    const changeThem = (clicked, setClicked) => {
+        setClicked(!clicked)
+    }
+
     // onAuth state change
     useEffect( () => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
@@ -42,7 +47,7 @@ const AuthProvider = ({children}) => {
             setLoading(false)
             // get jwt token
             if(currentUser){
-                axios.post('https://art-school-server.vercel.app/jwt', {email: currentUser.email})
+                axios.post('http://localhost:5000/jwt', {email: currentUser.email})
                 .then(data => {
                     localStorage.setItem('jwt_token', data.data.token)
                 })
@@ -104,7 +109,8 @@ const AuthProvider = ({children}) => {
         signUp,
         signIn,
         logOut,
-        userProfileUpdate
+        userProfileUpdate,
+        changeThem
     }
     return (
         <AuthContext.Provider value={authInfo}>
