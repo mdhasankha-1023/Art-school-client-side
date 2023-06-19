@@ -1,17 +1,15 @@
 import { MagnifyingGlass } from "react-loader-spinner";
 import useAuth from "../Hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
-import useAllUsers from "../Hooks/useAllUsers";
+import useSingleUser from "../Hooks/useSingleUser";
 
 
 const AdminRoute = ({children}) => {
     const {user, loading} = useAuth()
     const location = useLocation();
-    const [allUsers] = useAllUsers();
-    const currentUser = allUsers.filter(c => c.email === user.email)
-    console.log(currentUser[0])
+    const [singleUser, isLoading] = useSingleUser();
 
-    if(loading){
+    if(loading || isLoading){
         return <MagnifyingGlass
         visible={true}
         height="80"
@@ -26,11 +24,11 @@ const AdminRoute = ({children}) => {
 
 
 
-    if(user && currentUser[0]?.role === 'admin'){
+    if(user && singleUser?.role === 'admin'){
         return children;
     }
 
-    return  <Navigate to="/" state={{from: location}} replace></Navigate>
+    return  <Navigate to="/login" state={{from: location}} replace></Navigate>
 };
 
 export default AdminRoute;

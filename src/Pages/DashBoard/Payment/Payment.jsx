@@ -14,7 +14,6 @@ const Payment = () => {
     const {id} = useParams();
     const [selectedClasses] = useSelectedClasses(id);
     const paymentClass = selectedClasses[0];
-    console.log(paymentClass[0])
 
     return (
         <>

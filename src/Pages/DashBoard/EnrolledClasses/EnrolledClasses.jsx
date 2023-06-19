@@ -21,10 +21,13 @@ const EnrolledClasses = () => {
                                 <p className="font-bold">Instructor: <span>{c.Instructor}</span></p>
                                 <p className="font-bold">Status: <span className="text-[#FF3131]">Payed</span></p>
                             </div>
-                            
+
                         </div>)
                     }
                 </div>
+                {
+                    payedClasses.length === 0 && <h1 className="text-center mt-24 text-2xl font-bold text-gray-400">No Classes Available Here...</h1>
+                }
             </div>
         </>
     );
