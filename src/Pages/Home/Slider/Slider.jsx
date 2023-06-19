@@ -6,11 +6,13 @@ import slider5 from '../../../assets/slider/slider5.jpg'
 import slider6 from '../../../assets/slider/slider6.jpg'
 import { Fade, Slide } from "react-awesome-reveal";
 
-const Slider = () => {
 
+const Slider = () => {
+    // [#FEEFDC]
     return (
-        <div className="bg-[#FEEFDC] mt-3 py-8 md:py-24 px-8 md:flex">
-            <div className="md:w-1/2 w-full">
+        <div className="text-black bg-[#FEEFDC]
+         mt-3 py-8 md:py-24 px-8 md:flex">
+            <div className="md:w-1/2 w-full" >
                 <div className='mt-8'>
                     <Fade cascade>
                         <p className="uppercase my-4">-------Learn from professional</p>

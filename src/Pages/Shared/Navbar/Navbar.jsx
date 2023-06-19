@@ -1,12 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/logo/logo.png'
+import logo2 from '../../../assets/logo/footer-logo.png'
 import useAuth from '../../../Hooks/useAuth';
-import { FaUserAlt } from 'react-icons/fa';
+import { FaMoon, FaUserAlt } from 'react-icons/fa';
 import ActiveRoute from '../../../Routes/ActiveRoute';
+import { useState } from 'react';
 
 const Navbar = () => {
-    const { user, logOut, successAlert, errorAlert } = useAuth();
+    const { user, logOut, successAlert, errorAlert, changeThem } = useAuth();
     const navigate = useNavigate();
+    const [clicked, setClicked] = useState(false)
+
 
     // handle Log out 
     const handleLogOutBtn = () => {
@@ -42,7 +46,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar bg-base-100 fixed z-10 top-0">
+        <div className="navbar bg-base-100 fixed z-10 top-0 mx-auto max-w-screen-xl">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -52,7 +56,12 @@ const Navbar = () => {
                         {NavLink}
                     </ul>
                 </div>
-                <img src={logo} alt="" />
+                {
+                    clicked === true ? 
+                    <img src={logo2} alt="" />
+                    :
+                    <img src={logo} alt="" />
+                }
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -88,6 +97,9 @@ const Navbar = () => {
 
                     }
                 </div>
+                    <div className='me-4 cursor-pointer' onClick={()=>changeThem(clicked, setClicked)}>
+                    <FaMoon size='2em' ></FaMoon>
+                    </div>
             </div>
         </div>
     );
