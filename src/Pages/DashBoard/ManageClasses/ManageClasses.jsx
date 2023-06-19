@@ -11,7 +11,7 @@ const ManageClasses = () => {
 
     // handleChangedStatusBtn
     const handleChangedStatusBtn = (id, value) => {
-        fetch(`https://art-school-server.vercel.app/classes/${id}?status=${value}`, {
+        fetch(`http://localhost:5000/classes/${id}?status=${value}`, {
             method: 'PATCH',
         })
             .then(res => res.json())
@@ -36,7 +36,7 @@ const ManageClasses = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // const feedback = result.value;
-                fetch(`https://art-school-server.vercel.app/classes/${id}`, {
+                fetch(`http://localhost:5000/classes/${id}`, {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'

@@ -1,17 +1,16 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { MagnifyingGlass } from "react-loader-spinner";
-import useAllUsers from "../Hooks/useAllUsers";
+import useSingleUser from "../Hooks/useSingleUser";
 
 
 const StudentRoute = ({children}) => {
     const { user, loading } = useAuth()
     const location = useLocation();
-    const [allUsers] = useAllUsers();
-    const currentUser = allUsers.filter(c => c.email === user.email)
-    console.log(currentUser[0])
+    const [singleUser, isLoading] = useSingleUser();
+    
 
-    if (loading) {
+    if (loading || isLoading) {
         return <MagnifyingGlass
             visible={true}
             height="80"
@@ -26,7 +25,7 @@ const StudentRoute = ({children}) => {
 
 
 
-    if (user && currentUser[0]?.role === 'student') {
+    if (user && singleUser?.role === 'student') {
         return children;
     }
 
