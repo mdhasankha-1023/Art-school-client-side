@@ -46,7 +46,6 @@ const DashBoard = () => {
                                 <li><Link to='/dashBoard'>Home</Link></li>
                                 <li><Link to='/dashBoard/add-class'>Add Class</Link></li>
                                 <li><Link to='/dashBoard/my-classes'>My Classes</Link></li>
-                                <li><Link to='/dashBoard/payment'>Payment</Link></li>
                             </>
                             }
                             {userRole === 'admin' && <>
